@@ -18,7 +18,7 @@ const HomePage: React.FC = () => {
         onClick={handleGoProduct}
         className="
           mt-4 px-6 py-2 rounded-md border-none
-          bg-yellow-50 text-[#FEA405] font-medium
+          bg-yellow-50 text-[#f6ac29] font-medium
           cursor-pointer shadow-none
           transition-all duration-300
           hover:shadow-[0_0_19px_#eee]

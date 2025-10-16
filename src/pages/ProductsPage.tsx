@@ -42,8 +42,7 @@ const ProductsPage: React.FC = () => {
         return [...prev, { ...product, quantity: 1 }]; }});};
 
   const handleRemoveFromCart = (id: number) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === id);
+    setCart((prev) => {const existing = prev.find((item) => item.id === id);
 
       if (existing && existing.quantity > 1){return prev.map((item) =>item.id === id ?{ ...item, quantity: item.quantity - 1 }:item);}
        else {
@@ -114,7 +113,7 @@ const ProductsPage: React.FC = () => {
           );
         })}
       </div>
-      
+
       <div className="mt-10 bg-white p-6 rounded-lg shadow">
         <h2 className="text-2xl font-semibold mb-4">🧺 Cart</h2>
         {cart.length === 0 ? (

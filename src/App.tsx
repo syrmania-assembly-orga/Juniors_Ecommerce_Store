@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route,} from "react-router-dom";
 import './index.css'
-import HomePage from '../pages/Welcom';
-import ProductsPage from '../pages/ProductsPage';
+import HomePage from './pages/Welcom.tsx';
+import ProductsPage from './pages/ProductsPage.tsx';
 const App: React.FC = () => {
   return(
    <div>

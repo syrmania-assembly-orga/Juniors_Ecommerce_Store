@@ -1,8 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectCartTotal } from "../features/cart/cartSelectors";
+import { useSelector } from 'react-redux';
+import { selectCartTotal } from '../features/cart/cartSelectors';
 
-const CartSummary: React.FC = () => {
+const CartSummary = () => {
   const total = useSelector(selectCartTotal);
   const tax = total * 0.08;
 

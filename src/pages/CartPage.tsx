@@ -1,11 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../features/cart/cartSelectors";
-import { Link } from "react-router-dom";
-import CartItemCard from "../components/CartItemCard";
-import CartSummary from "../components/CartSummary";
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../features/cart/cartSelectors';
+import { Link } from 'react-router-dom';
+import CartItemCard from '../components/CartItemCard';
+import CartSummary from '../components/CartSummary';
 
-const CartPage: React.FC = () => {
+const CartPage = () => {
   const cart = useSelector(selectCartItems);
 
   if (cart.length === 0)

@@ -12,6 +12,7 @@ const CartItemCard = ({ item }: { item: ICartItem }) => {
   };
 
   const handleRemove = () => {
+    console.log(item);
     dispatch(removeItem(item.id));
   };
 
@@ -19,19 +20,19 @@ const CartItemCard = ({ item }: { item: ICartItem }) => {
     <div className="flex border-b py-4 items-center gap-4">
       <img src={item.image} alt={item.name} className="w-20 h-20" />
       <div className="flex-1 text-left">
-        <h3 className="font-semibold">{item.name}</h3>
-        <p>${item.price.toFixed(2)}</p>
+        <h3 className="font-semibold text-blue-600">{item.name}</h3>
+        <p className="font-semibold text-black"> {item.price.toFixed(2)}</p>
         <div className="flex items-center mt-2 gap-2">
           <button
             onClick={() => handleQuantityChange(item.quantity - 1)}
-            className="px-2 border rounded"
+            className="px-2 border rounded text-blue-500"
           >
             -
           </button>
           <span>{item.quantity}</span>
           <button
             onClick={() => handleQuantityChange(item.quantity + 1)}
-            className="px-2 border rounded"
+            className="px-2 border rounded text-blue-500"
           >
             +
           </button>
@@ -43,7 +44,7 @@ const CartItemCard = ({ item }: { item: ICartItem }) => {
           </button>
         </div>
       </div>
-      <div className="font-semibold">${(item.price * item.quantity).toFixed(2)}</div>
+      <div className="font-semibold text-blue-500">${(item.price * item.quantity).toFixed(2)}</div>
     </div>
   );
 };

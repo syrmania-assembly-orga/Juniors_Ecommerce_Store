@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
+import { useDispatch } from 'react-redux'
+import { addItem, removeItem, updateQuantity } from '../store/slices/cartSlice.ts'
+import { selectCartItems } from '../store/slices/cartSelectors';
+import { useSelector } from 'react-redux';
+import { 
+  selectProducts, 
+  selectProductsLoading, 
+  selectProductsError 
+} from "../store/slices/productSelectors.ts";import { fetchProducts } from "../store/slices/productSlice.ts";
 
 interface IProductItem {
   id: number;
@@ -14,50 +22,64 @@ interface ICartItem extends IProductItem {quantity: number;
 }
 
 const ProductsPage: React.FC = () => {
-  const [products, setProducts] = useState<IProductItem[]>([]);
-  const [cart, setCart] = useState<ICartItem[]>([]);
+  const dispatch = useDispatch()
+  const products = useSelector(selectProducts)
+  const loading = useSelector(selectProductsLoading)
+  const error = useSelector(selectProductsError)
+  const cart = useSelector(selectCartItems);
   const [expandedProduct, setExpandedProduct] = useState<number | null>(null);
-
   const navigate = useNavigate(); 
 
- 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get("https://fakestoreapi.com/products");
-        setProducts(res.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-    fetchProducts();
-  }, []);
-
   const handleAddToCart = (product: IProductItem) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
 
-      if (existing) {return prev.map((item) =>item.id === product.id ?{ ...item, quantity: item.quantity + 1 }:item);}
-       else { 
-        return [...prev, { ...product, quantity: 1 }]; }});};
+    const cartItem: ICartItem = {
+      id: product.id,
+      name: product.title,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    }
+    dispatch(addItem(cartItem))
+  }
 
   const handleRemoveFromCart = (id: number) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === id);
-
-      if (existing && existing.quantity > 1){return prev.map((item) =>item.id === id ?{ ...item, quantity: item.quantity - 1 }:item);}
-       else {
-        return prev.filter((item) => item.id !== id);}});};
+  const cartItem = cart.find((item) => item.id === id);
+  if (cartItem) {
+    const newQuantity = cartItem.quantity - 1;
+    if (newQuantity > 0) {
+      dispatch(updateQuantity({ id, quantity: newQuantity }));
+    } else {
+      dispatch(removeItem(id));
+    }
+  }
+  }
 
   const toggleDescription = (id: number) => {
-    setExpandedProduct((prev) => (prev === id ? null : id));};
+    setExpandedProduct((prev) => (prev === id ? null : id));
+  };
+
+  useEffect(() => {
+  dispatch(fetchProducts())
+}, [dispatch])
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 px-8 py-10">
       <h1 className="text-3xl font-semibold text-center mb-10">
         🛍 Products
       </h1>
+      {loading && (
+      <div class="flex justify-center items-center h-40">
+        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+      )}
 
+      {/* Error Message */}
+      {error && (
+        <div className="text-center py-10 text-red-600 font-semibold">
+          Error loading products: {error}
+        </div>
+      )}
       {/* قائمة المنتجات */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => {
@@ -97,7 +119,7 @@ const ProductsPage: React.FC = () => {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleRemoveFromCart(product.id);
+                    handleRemoveFromCart(product.id,product.quantity);
                   }}
                   className="bg-red-500 text-white rounded-full w-10 h-10 flex justify-center items-center text-xl hover:bg-red-600"
                 >
@@ -124,7 +146,7 @@ const ProductsPage: React.FC = () => {
             {cart.map((item) => (
               <li key={item.id} className="flex justify-between mb-2">
                 <span>
-                  {item.title} x {item.quantity}
+                  {item.name} x {item.quantity}
                 </span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
               </li>

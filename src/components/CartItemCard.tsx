@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { updateQuantity, removeItem } from '../features/cart/cartSlice';
+import { updateQuantity, removeItem } from '../store/slices/cartSlice';
 import type { ICartItem } from '../types/cart';
 
 const CartItemCard = ({ item }: { item: ICartItem }) => {

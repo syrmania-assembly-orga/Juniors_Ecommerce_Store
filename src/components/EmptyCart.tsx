@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const EmptyCart = () => (
   <div className="text-center py-20">
@@ -7,6 +7,6 @@ const EmptyCart = () => (
       Continue Shopping
     </Link>
   </div>
-);
+)
 
-export default EmptyCart;
+export default EmptyCart

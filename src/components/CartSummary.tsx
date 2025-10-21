@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
-import { selectCartTotal } from '../store/slices/cartSelectors';
+import { useSelector } from 'react-redux'
+import { selectCartTotal } from '../store/slices/cartSelectors'
 
 const CartSummary = () => {
-  const total = useSelector(selectCartTotal);
-  const tax = total * 0.08;
+  const total = useSelector(selectCartTotal)
+  const tax = total * 0.08
 
   return (
     <div className="border p-4 rounded-lg shadow-md bg-white">
@@ -25,7 +25,7 @@ const CartSummary = () => {
         Proceed to Checkout
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default CartSummary;
+export default CartSummary

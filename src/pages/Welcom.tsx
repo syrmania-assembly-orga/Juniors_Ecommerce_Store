@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleGoProduct = () => {
-    navigate('/products');
-  };
+    navigate('/products')
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center px-5 text-[#FFFFF0]">
@@ -26,7 +26,7 @@ const HomePage = () => {
         Start Shopping
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

@@ -1,5 +1,5 @@
-import type { Product } from './product';
+import type { IProductItem } from './product'
 
-export interface ICartItem extends Product {
-  quantity: number;
+export interface ICartItem extends IProductItem {
+  quantity: number
 }

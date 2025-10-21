@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import type { RootState } from '../store'  // adjust path if needed
-import type { IProductItem } from '../../types/product';
-import { endpoints } from '../../api/endpoints.ts';
-
-
+// import type { RootState } from '../store'  // adjust path if needed
+import type { IProductItem } from '../../types/product'
+import { endpoints } from '../../api/endpoints.ts'
 
 interface IProductsState {
   items: IProductItem[]
@@ -15,7 +13,7 @@ interface IProductsState {
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
-    const res = await axios.get<IProductItem[]>((endpoints.products))
+    const res = await axios.get<IProductItem[]>(endpoints.products)
     return res.data
   }
 )
@@ -48,5 +46,3 @@ const productsSlice = createSlice({
 })
 
 export default productsSlice.reducer
-
-

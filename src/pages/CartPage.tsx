@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
-import { selectCartItems } from '../store/slices/cartSelectors';
-import { Link } from 'react-router-dom';
-import CartItemCard from '../components/CartItemCard';
-import CartSummary from '../components/CartSummary';
+import { useSelector } from 'react-redux'
+import { selectCartItems } from '../store/slices/cartSelectors'
+import { Link } from 'react-router-dom'
+import CartItemCard from '../components/CartItemCard'
+import CartSummary from '../components/CartSummary'
 
 const CartPage = () => {
-  const cart = useSelector(selectCartItems);
+  const cart = useSelector(selectCartItems)
 
   if (cart.length === 0)
     return (
@@ -15,7 +15,7 @@ const CartPage = () => {
           Continue Shopping
         </Link>
       </div>
-    );
+    )
 
   return (
     <div className="max-w-6xl mx-auto mt-10 grid md:grid-cols-3 gap-6">
@@ -27,7 +27,7 @@ const CartPage = () => {
       </div>
       <CartSummary />
     </div>
-  );
-};
+  )
+}
 
-export default CartPage;
+export default CartPage

@@ -1,0 +1,25 @@
+{
+  // ✨ شغّل تصحيح ESLint عند الحفظ
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // 🎨 استخدم Prettier كمنسق افتراضي
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 🧼 فعّل التنسيق عند الحفظ
+  "editor.formatOnSave": true,
+
+  // 💬 خليه يشتغل على JS و TS و React
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  // ⛔ أوقف التنسيق من ESLint نفسه لتجنب التعارض
+  "eslint.format.enable": false,
+
+  // 🎯 إعدادات Prettier
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2
+}

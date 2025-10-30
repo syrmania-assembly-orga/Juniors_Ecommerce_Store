@@ -1,0 +1,51 @@
+image: node:20
+
+stages:
+  - install
+  - build
+  - test
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: install
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+  only:
+    - main
+    - merge_requests
+
+build_app:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+      - build
+  only:
+    - main
+    - merge_requests
+
+run_tests:
+  stage: test
+  script:
+    - npm test -- --watchAll=false
+  only:
+    - merge_requests
+    - main
+
+deploy:
+  stage: deploy
+  script:
+    - echo "🚀 Ready to deploy build output"
+    # ممكن تضيفي هنا رفع إلى السيرفر أو GitLab Pages
+  only:
+    - main
